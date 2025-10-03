@@ -37,7 +37,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
       {/* Tagline */}
       <p className="mt-6 text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl leading-relaxed">
-        NeuroGuardian helps you track, monitor, and improve your brain health
+        NeuroGuardian  helps you track, monitor, and improve your brain health
         with real-time EEG insights, wellness tools, and cognitive support.
       </p>
     </section>
