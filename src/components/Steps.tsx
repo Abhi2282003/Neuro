@@ -1,24 +1,6 @@
-"use client";
+import * as React from "react";
 
-import React from "react";
-
-type HeroSectionProps = {
-  isDeviceConnected: boolean;
-  isSerial: boolean;
-  isLoading: boolean;
-  connectToDevice: () => void;
-  disconnect: () => void;
-  disconnectDevice: () => void;
-};
-
-const HeroSection: React.FC<HeroSectionProps> = ({
-  isDeviceConnected,
-  isSerial,
-  isLoading,
-  connectToDevice,
-  disconnect,
-  disconnectDevice,
-}) => {
+const Steps: React.FC = () => {
   return (
     <section className="flex flex-col items-center justify-center text-center py-24 bg-transparent">
       {/* Top Tag */}
@@ -37,11 +19,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
       {/* Tagline */}
       <p className="mt-6 text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl leading-relaxed">
-        NeuroGuardian  helps you track, monitor, and improve your brain health
+        NeuroGuardian helps you track, monitor, and improve your brain health
         with real-time EEG insights, wellness tools, and cognitive support.
       </p>
     </section>
   );
 };
 
-export default HeroSection;
+export default Steps;
