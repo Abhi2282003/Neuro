@@ -2,9 +2,27 @@
 
 import React from "react";
 
-const HeroSection: React.FC = () => {
+type HeroSectionProps = {
+  isDeviceConnected: boolean;
+  isSerial: boolean;
+  isLoading: boolean;
+  connectToDevice: () => void;
+  disconnect: () => void;
+  disconnectDevice: () => void;
+};
+
+const HeroSection: React.FC<HeroSectionProps> = ({
+  isDeviceConnected,
+  isSerial,
+  isLoading,
+  connectToDevice,
+  disconnect,
+  disconnectDevice,
+}) => {
   return (
-    <section className="flex flex-col items-center justify-center text-center py-24 bg-gradient-to-b from-[#0B0F14] via-[#0B0F14] to-[#0B0F14]">
+    <section className="flex flex-col items-center justify-center text-center py-24 bg-transparent">
+
+
       
       {/* Top Tag */}
       <div className="mb-6">
@@ -26,12 +44,7 @@ const HeroSection: React.FC = () => {
         with real-time EEG insights, wellness tools, and cognitive support.
       </p>
 
-      {/* CTA Button */}
-      <div className="mt-8">
-        <button className="px-8 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-xl shadow-lg transition-all duration-300">
-          Get Started
-        </button>
-      </div>
+      
     </section>
   );
 };
