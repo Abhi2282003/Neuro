@@ -1608,6 +1608,7 @@ const Connection: React.FC<ConnectionProps> = ({
                                         )}
                                     </Popover>
                                 )}
+                            </Popover>
                         </TooltipTrigger>
                         <TooltipContent>
                             <p>{isDeviceConnected ? "Disconnect Device" : "Connect Device"}</p>
