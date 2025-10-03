@@ -1,119 +1,39 @@
-import * as React from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "./ui/carousel";
-import Link from "next/link";
-import Image from "next/image";
+"use client";
 
-// Define the type for carousel items
-type CarouselItemType = {
-  title: string;
-  image: string;
-};
+import React from "react";
 
-const Steps: React.FC = () => {
-  const ImageLinks: string[] = [
-    "./steps/1.webp",
-    "./steps/2.webp",
-    "./steps/3.webp",
-    "./steps/4.webp",
-    "./steps/5.webp",
-    "./steps/6.webp",
-  ];
-
-  const carouselItems: CarouselItemType[] = [
-    { title: "BioAmp hardware to MCU/ADC Connection", image: ImageLinks[0] },
-    { title: "Connection with Arduino", image: ImageLinks[1] },
-    { title: "BioAmp Cable Connections", image: ImageLinks[2] },
-    { title: "Electrodes placement for ECG", image: ImageLinks[3] },
-    { title: "Placement for EOG Horizontal", image: ImageLinks[4] },
-    { title: "Placement for EOG Vertical", image: ImageLinks[5] },
-  ];
-
-  const [selectedItem, setSelectedItem] = React.useState<CarouselItemType | null>(null);
-
-  const handleImageClick = (item: CarouselItemType) => {
-    setSelectedItem(item);
-  };
-
-  const closeModal = () => {
-    setSelectedItem(null);
-  };
-
+const HeroSection: React.FC = () => {
   return (
-    <div className="flex flex-col flex-[1_1_0%] min-h-80 justify-center items-center gap-0 2xl:gap-2">
-      <div className="flex items-center justify-center text-sm sm:text-xl text-center">
-        <span className="flex flex-row gap-2 mt-6">
-          Click Connect For Board Connection.
+    <section className="flex flex-col items-center justify-center text-center py-24 bg-gradient-to-b from-[#0B0F14] via-[#0B0F14] to-[#0B0F14]">
+      
+      {/* Top Tag */}
+      <div className="mb-6">
+        <span className="px-6 py-2 text-sm md:text-lg font-semibold text-cyan-400 border border-cyan-400 rounded-full shadow-lg">
+          🌐 AI-Powered Neurological Wellness Platform
         </span>
       </div>
-      <div className="text-sm sm:text-base text-muted-foreground text-center pb-4">
-        For More Detailed Steps Please Refer{" "}
-        <Link
-          href="https://docs.upsidedownlabs.tech/hardware/bioamp/bioamp-exg-pill/index.html"
-          className="underline underline-offset-4"
-        >
-          Official Documentation
-        </Link>
-      </div>
-      <div className="relative w-full max-w-7xl max-h-7xl 2xl:max-w-[195vh] overflow-x-auto">
-        <Carousel
-          opts={{
-            align: "start",
-          }}
-          className="w-full select-none px-12"
-        >
-          <CarouselContent>
-            {carouselItems.map((item, index) => (
-              <CarouselItem
-                key={index}
-                className="sm:basis-1/1 md:basis-1/4 lg:basis-1/4 xl:basis-1/4 2xl:basis-1/4"
-              >
-                <div
-                  onClick={() => handleImageClick(item)}
-                  className="cursor-pointer"
-                >
-                  <Image
-                    alt={item.title}
-                    width={1000}
-                    height={1500}
-                    src={item.image}
-                    layout="responsive"
-                    className="rounded-xl xl:max-h-[70vh] lg:max-h-[70vh] 2xl:w-[70vh] w-full object-contain "
-                  />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="border-primary border-2 left-2 absolute" />
-          <CarouselNext className="border-primary border-2 right-2 absolute" />
-        </Carousel>
-      </div>
 
-      {/* Modal */}
-      {selectedItem && (
-        <div
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-          onClick={closeModal}
-        >
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full  2xl:max-w-3xl">
-            <Image
-              alt={selectedItem.title}
-              src={selectedItem.image}
-              width={800}
-              height={800}
-              layout="responsive"
-              className="rounded-lg"
-            />
-          </div>
-        </div>
-      )}
-    </div>
+      {/* Main Heading */}
+      <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-transparent drop-shadow-md">
+        Your Complete
+        <br />
+        Brain Health Companion
+      </h1>
+
+      {/* Tagline */}
+      <p className="mt-6 text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl leading-relaxed">
+        NeuroGuardian helps you track, monitor, and improve your brain health 
+        with real-time EEG insights, wellness tools, and cognitive support.
+      </p>
+
+      {/* CTA Button */}
+      <div className="mt-8">
+        <button className="px-8 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-xl shadow-lg transition-all duration-300">
+          Get Started
+        </button>
+      </div>
+    </section>
   );
 };
 
-export default Steps;
+export default HeroSection;
