@@ -1012,6 +1012,20 @@ const Connection: React.FC<ConnectionProps> = ({
     const EXGFiltersRef = useRef<EXGFilter[]>([]);
     const connectedDeviceRef = useRef<any | null>(null); // UseRef for device tracking
 
+    // // Initialize filters when device connects or channel count changes
+    // useEffect(() => {
+    //     if (maxCanvasElementCountRef.current > 0) {
+    //         notchFiltersRef.current = Array.from({ length: maxCanvasElementCountRef.current }, () => new Notch());
+    //         EXGFiltersRef.current = Array.from({ length: maxCanvasElementCountRef.current }, () => new EXGFilter());
+    //         onehighRef.current = Array.from({ length: maxCanvasElementCountRef.current }, () => new HighPassFilter());
+
+    //         // Set initial filter parameters
+    //         // onehighRef.current.forEach(filter => filter.setbits(500));
+    //         onehighRef.current.forEach(filter => filter.setSamplingRate(500));
+    //         notchFiltersRef.current.forEach(filter => filter.setbits(500));
+    //         EXGFiltersRef.current.forEach(filter => filter.setbits("12", 500));
+    //     }
+    // }, [maxCanvasElementCountRef.current]);
     const processSample = useCallback((dataView: DataView): void => {
         if (dataView.byteLength !== SINGLE_SAMPLE_LEN) {
             console.log("Unexpected sample length: " + dataView.byteLength);
@@ -1528,31 +1542,103 @@ const Connection: React.FC<ConnectionProps> = ({
                             <Popover open={open} onOpenChange={setOpen}>
                                 <PopoverTrigger asChild>
                                     <Button
-                                        className="px-12 py-4 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-xl shadow-lg transition-all duration-300 flex items-center gap-2"
+                                        className="flex items-center gap-1 py-2 px-4 rounded-xl font-semibold"
                                         onClick={() => (isDeviceConnected ? isSerial ? disconnectDevice() : disconnect() : connectToDevice())}
                                         disabled={isLoading}
                                     >
                                         {isLoading ? (
                                             <>
-                                                <Loader size={20} className="animate-spin" />
+                                                <Loader size={17} className="animate-spin" />
                                                 Connecting...
                                             </>
                                         ) : isDeviceConnected ? (
                                             <>
                                                 Disconnect
-                                                <CircleX size={20} />
+                                                <CircleX size={17} />
                                             </>
                                         ) : (
                                             <>
-                                                Get Started
-                                                <Cable size={20} />
+                                                Chords Visualizer
+                                                <Cable size={17} />
                                             </>
                                         )}
                                     </Button>
                                 </PopoverTrigger>
-                                
-                                
-                                
+                                {!isDeviceConnected && (
+                                    <Button
+                                        className="py-2 px-4 rounded-xl font-semibold"
+                                        onClick={() => {
+                                            localStorage.setItem("autoConnectSerial", "true"); // Auto-connect flag
+                                            router.push("/serial-plotter");
+                                        }}
+                                    >
+                                        Serial Wizard
+                                    </Button>
+                                )}
+                                {!isDeviceConnected && (
+                                    <Popover open={openfft} onOpenChange={setOpenfft}>
+                                        <PopoverTrigger asChild>
+                                            <Button
+                                                className="flex items-center gap-1 py-2 px-4 rounded-xl font-semibold"
+                                                disabled={isfftLoading || isPauseState}
+                                            >
+                                                {isfftLoading ? (
+                                                    <>
+                                                        <Loader size={17} className="animate-spin" />
+                                                        Connecting...
+                                                    </>
+                                                ) : isDeviceConnected ? (
+                                                    <>
+                                                        Disconnect
+                                                        <CircleX size={17} />
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        FFT Visualizer
+                                                        <Cable size={17} />
+                                                    </>
+                                                )}
+                                            </Button>
+                                        </PopoverTrigger>
+
+                                        {!isDeviceConnected && (
+                                            <PopoverContent className="w-40 p-3 space-y-2 mx-4 mb-2">
+                                                <Button
+                                                    className="w-full"
+                                                    onClick={() => connectToDevicefft()}
+                                                >
+                                                    Serial
+                                                </Button>
+                                                <Button
+                                                    className="w-full"
+                                                    onClick={() => { connectBLE() }}
+                                                >
+                                                    Bluetooth
+                                                </Button>
+                                            </PopoverContent>
+                                        )}
+                                    </Popover>
+                                )}
+                                {!isDeviceConnected && (
+                                    <Button
+                                        className="py-2 px-4 rounded-xl font-semibold"
+                                        onClick={() => {
+                                            router.push("/npg-lite");
+                                        }}
+                                    >
+                                        NPG-Lite
+                                    </Button>
+                                )}
+                                {!isDeviceConnected && (
+                                    <Button
+                                        className="py-2 px-4 rounded-xl font-semibold"
+                                        onClick={() => {
+                                            router.push("/muscle-strength");
+                                        }}
+                                    >
+                                        Rep-Forge
+                                    </Button>
+                                )}
                             </Popover>
                         </TooltipTrigger>
                         <TooltipContent>
