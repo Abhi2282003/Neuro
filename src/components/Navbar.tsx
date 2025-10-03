@@ -31,7 +31,6 @@ const Navbar = ({ isDisplay }: { isDisplay: boolean }) => {
               <div className="font-bold text-3xl bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-transparent drop-shadow-md">
               NeuroGuardian
               </div>
-
             </Link>
            
           </div>
