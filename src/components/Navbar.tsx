@@ -3,43 +3,35 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ModeToggle } from "./Theming/mode-toggle";
-import { Badge } from "./ui/badge";
-import { useTheme } from "next-themes";
 
 const Navbar = ({ isDisplay }: { isDisplay: boolean }) => {
-  const { theme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // To prevent hydration mismatch, we wait until the component is mounted
+  // Avoid hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return null; // Avoid rendering until the component is mounted
-  }
-
-  // Determine the current theme (dark/light)
-  const currentTheme = theme === "system" ? systemTheme : theme;
+  if (!mounted) return null;
 
   return (
-    <div>
-      <div className="top-0 md:left-0 md:right-0 flex backdrop-blur-sm justify-center py-[10px] border-b border-g items-center font-bold z-50">
-        <div className="flex w-full max-w-screen mx-2 md:mx-4 justify-between items-center">
-          <div className="flex flex-row gap-2 items-center group">
-            <Link href="https://neuroguardian.lovable.app/student">
-              <div className="font-bold text-3xl bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-transparent drop-shadow-md">
+    <nav className="sticky top-0 z-50 w-full backdrop-blur-sm border-b border-white/10">
+      <div className="mx-2 md:mx-4 flex h-[56px] max-w-screen items-center justify-between">
+        {/* Brand */}
+        <div className="flex items-center gap-2">
+          <Link href="https://neuroguardian.lovable.app/student">
+            <span className="font-bold text-3xl bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-transparent drop-shadow-md">
               NeuroGuardian
-              </div>
-            </Link>
-           
-          </div>
-          <div className="flex gap-0 md:gap-2 items-center">
-            <ModeToggle disabled={!isDisplay} />
-          </div>
+            </span>
+          </Link>
+        </div>
+
+        {/* Right controls */}
+        <div className="flex items-center gap-2">
+          <ModeToggle disabled={!isDisplay} />
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
