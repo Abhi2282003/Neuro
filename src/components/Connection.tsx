@@ -1558,7 +1558,7 @@ const Connection: React.FC<ConnectionProps> = ({
                                             </>
                                         ) : (
                                             <>
-                                                Chords Visualizer
+                                                Data Visualization
                                                 <Cable size={17} />
                                             </>
                                         )}
