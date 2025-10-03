@@ -29,15 +29,10 @@ const Navbar = ({ isDisplay }: { isDisplay: boolean }) => {
           <div className="flex flex-row gap-2 items-center group">
             <Link href="/">
               <div className="font-rancho font-bold text-2xl duration-300 pl-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-transparent bg-clip-text ">
-                Chords
+                NeuroGuardian
               </div>
             </Link>
-            <Badge
-              variant={"outline"}
-              className="font-poppins tracking-wider font-thin h-fit rounded "
-            >
-              Alpha
-            </Badge>
+            
           </div>
           <div className="flex gap-0 md:gap-2 items-center">
             <ModeToggle disabled={!isDisplay} />
