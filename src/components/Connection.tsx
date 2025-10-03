@@ -1565,17 +1565,6 @@ const Connection: React.FC<ConnectionProps> = ({
                                     </Button>
                                 </PopoverTrigger>
                                 {!isDeviceConnected && (
-                                    <Button
-                                        className="py-2 px-4 rounded-xl font-semibold"
-                                        onClick={() => {
-                                            localStorage.setItem("autoConnectSerial", "true"); // Auto-connect flag
-                                            router.push("/serial-plotter");
-                                        }}
-                                    >
-                                        Serial Wizard
-                                    </Button>
-                                )}
-                                {!isDeviceConnected && (
                                     <Popover open={openfft} onOpenChange={setOpenfft}>
                                         <PopoverTrigger asChild>
                                             <Button
