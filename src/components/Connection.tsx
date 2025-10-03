@@ -1536,116 +1536,48 @@ const Connection: React.FC<ConnectionProps> = ({
             {/* Center-aligned buttons */}
             <div className="flex gap-3 items-center justify-center">
                 {/* Connection button with tooltip */}
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Popover open={open} onOpenChange={setOpen}>
-                                <PopoverTrigger asChild>
-                                    <Button
-                                        className="flex items-center gap-1 py-2 px-4 rounded-xl font-semibold"
-                                        onClick={() => (isDeviceConnected ? isSerial ? disconnectDevice() : disconnect() : connectToDevice())}
-                                        disabled={isLoading}
-                                    >
-                                        {isLoading ? (
-                                            <>
-                                                <Loader size={17} className="animate-spin" />
-                                                Connecting...
-                                            </>
-                                        ) : isDeviceConnected ? (
-                                            <>
-                                                Disconnect
-                                                <CircleX size={17} />
-                                            </>
-                                        ) : (
-                                            <>
-                                                Chords Visualizer
-                                                <Cable size={17} />
-                                            </>
-                                        )}
-                                    </Button>
-                                </PopoverTrigger>
-                                {!isDeviceConnected && (
-                                    <Button
-                                        className="py-2 px-4 rounded-xl font-semibold"
-                                        onClick={() => {
-                                            localStorage.setItem("autoConnectSerial", "true"); // Auto-connect flag
-                                            router.push("/serial-plotter");
-                                        }}
-                                    >
-                                        Serial Wizard
-                                    </Button>
-                                )}
-                                {!isDeviceConnected && (
-                                    <Popover open={openfft} onOpenChange={setOpenfft}>
-                                        <PopoverTrigger asChild>
-                                            <Button
-                                                className="flex items-center gap-1 py-2 px-4 rounded-xl font-semibold"
-                                                disabled={isfftLoading || isPauseState}
-                                            >
-                                                {isfftLoading ? (
-                                                    <>
-                                                        <Loader size={17} className="animate-spin" />
-                                                        Connecting...
-                                                    </>
-                                                ) : isDeviceConnected ? (
-                                                    <>
-                                                        Disconnect
-                                                        <CircleX size={17} />
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        FFT Visualizer
-                                                        <Cable size={17} />
-                                                    </>
-                                                )}
-                                            </Button>
-                                        </PopoverTrigger>
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            className="flex items-center gap-1 py-2 px-4 rounded-xl font-semibold"
+            onClick={() =>
+              isDeviceConnected
+                ? isSerial
+                  ? disconnectDevice()
+                  : disconnect()
+                : connectToDevice()
+            }
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <>
+                <Loader size={17} className="animate-spin" />
+                Connecting...
+              </>
+            ) : isDeviceConnected ? (
+              <>
+                Disconnect
+                <CircleX size={17} />
+              </>
+            ) : (
+              <>
+                Get Started
+                <Cable size={17} />
+              </>
+            )}
+          </Button>
+        </PopoverTrigger>
+      </Popover>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>{isDeviceConnected ? "Disconnect Device" : "Connect Device"}</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
 
-                                        {!isDeviceConnected && (
-                                            <PopoverContent className="w-40 p-3 space-y-2 mx-4 mb-2">
-                                                <Button
-                                                    className="w-full"
-                                                    onClick={() => connectToDevicefft()}
-                                                >
-                                                    Serial
-                                                </Button>
-                                                <Button
-                                                    className="w-full"
-                                                    onClick={() => { connectBLE() }}
-                                                >
-                                                    Bluetooth
-                                                </Button>
-                                            </PopoverContent>
-                                        )}
-                                    </Popover>
-                                )}
-                                {!isDeviceConnected && (
-                                    <Button
-                                        className="py-2 px-4 rounded-xl font-semibold"
-                                        onClick={() => {
-                                            router.push("/npg-lite");
-                                        }}
-                                    >
-                                        NPG-Lite
-                                    </Button>
-                                )}
-                                {!isDeviceConnected && (
-                                    <Button
-                                        className="py-2 px-4 rounded-xl font-semibold"
-                                        onClick={() => {
-                                            router.push("/muscle-strength");
-                                        }}
-                                    >
-                                        Rep-Forge
-                                    </Button>
-                                )}
-                            </Popover>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>{isDeviceConnected ? "Disconnect Device" : "Connect Device"}</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
                 {/* Display (Play/Pause) button with tooltip */}
                 {isDeviceConnected && !FFTDeviceConnected && (
                     <div className="flex items-center gap-0.5 mx-0 px-0">
