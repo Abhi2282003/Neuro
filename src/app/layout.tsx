@@ -17,7 +17,7 @@ const basePath = isGithubActor ? "" : "/Chords-Web";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Chords",
+  title: "NeuroGuardian",
   description: "Web Serial based Biopotential Signal recorder application.",
   manifest: `${basePath}/manifest.json`, // ✅ Dynamically set manifest path
 };
