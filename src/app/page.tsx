@@ -40,18 +40,7 @@ const SkeletonUI = () => (
 const page = () => {
   return (
     <>
-      <div className="flex flex-col">
-        <HeadSection />
-        <Separator className="mt-12" />
-        <Steps />
-        <Separator className="mt-12" />
-        <Features />
-        <Separator className="mt-12" />
-        <TechStack />
-        <Separator className="mt-12" />
-        <FAQSection />
-        <Footer />
-      </div>
+      
     </>
   );
 };
